@@ -63,3 +63,12 @@ export const verificationTokens = pgTable(
     compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
   })
 );
+
+export const room = pgTable("room", {
+  userId: text("userId")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }), // This means room belongs to the user who created it and can delete it
+  name: text("name"),
+  language: text("language"),
+  githubRepo: text("githubRepo"),
+});
