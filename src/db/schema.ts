@@ -1,9 +1,11 @@
+import { sql } from "drizzle-orm";
 import {
   timestamp,
   pgTable,
   text,
   primaryKey,
   integer,
+  uuid,
 } from "drizzle-orm/pg-core";
 import type { AdapterAccount } from "next-auth/adapters";
 
@@ -65,10 +67,17 @@ export const verificationTokens = pgTable(
 );
 
 export const room = pgTable("room", {
+  id: uuid("id")
+    .default(sql`gen_random_uuid()`)
+    .notNull()
+    .primaryKey(),
   userId: text("userId")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }), // This means room belongs to the user who created it and can delete it
   name: text("name"),
   language: text("language"),
   githubRepo: text("githubRepo"),
+  description: text("description"),
 });
+
+export type Room = typeof room.$inferSelect;

@@ -14,16 +14,19 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
+import { createRoomAction } from "./actions";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   name: z.string().min(1).max(50),
-  description: z.string().min(1).max(50),
+  description: z.string().min(1).max(250),
   language: z.string().min(1).max(50),
   githubRepo: z.string().min(1).max(50),
 });
 
 export function CreateRoomForm() {
+  const router = useRouter();
+
   // Defining our Form
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -35,10 +38,10 @@ export function CreateRoomForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    // Here we invole a server action to store data in our database
+    await createRoomAction(values);
+    router.push("/");
   }
 
   return (

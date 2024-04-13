@@ -15,7 +15,7 @@ export function Header() {
         ) : (
           <Button onClick={() => signIn("google")}>Sign In</Button>
         )}
-        {session.data?.user?.name}
+        {session.data?.user?.name ? `Welcome, ${session.data?.user?.name}` : ``}
         <ModeToggle />
       </div>
     </header>
