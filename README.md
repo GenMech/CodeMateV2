@@ -1,3 +1,22 @@
+## 💥 CodeMate
+
+It is a collaborative coding platform allowing users to code with peers, solve doubts together, and engage in real-time collaboration. 
+
+Users can create rooms or join them by searching based on tags.
+
+It has a user-friendly interface for creating and joining rooms, enabling users to specify room details such as name, primary language, tags, and GitHub repository. Facilitated easy room discovery based on tags for seamless collaboration.
+
+It has video calling, voice chat, screen sharing to live code with peers.
+
+## 💡 Techstack
+
+- Next.js
+- PostgreSQL
+- Drizzle ORM
+- Next AUTH
+- Typescript
+- Docker
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
