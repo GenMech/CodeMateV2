@@ -1,3 +1,10 @@
+![CodeMateV2](https://socialify.git.ci/GenMech/CodeMateV2/image?description=1&language=1&name=1&owner=1&theme=Light)
+
+<p align="center">
+<img src="https://img.shields.io/github/license/GenMech/CodeMateV2" />
+<img src="https://img.shields.io/badge/Author-GenMech-yellow" />
+</p>
+
 ## 💥 CodeMate
 
 It is a collaborative coding platform allowing users to code with peers, solve doubts together, and engage in real-time collaboration. 
