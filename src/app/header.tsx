@@ -41,7 +41,7 @@ export function Header() {
   const session = useSession();
 
   return (
-    <header className="bg-gray-100 dark:bg-gray-900 py-3 container mx-auto">
+    <header className="bg-gray-100 dark:bg-gray-900 py-3 px-5">
       <div className="flex justify-between items-center">
         <Link href="/">CodeMate</Link>
         <div className="flex items-center gap-4">
