@@ -56,7 +56,7 @@ export default async function Home() {
           <Link href="/createRoom">Create Room</Link>
         </Button>
       </div>
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid lg:grid-cols-4 gap-4 md:grid-cols-2 sm:grid-cols-1">
         {rooms.map((room) => {
           return <RoomCard key={room.id} room={room} />;
         })}
