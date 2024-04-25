@@ -22,6 +22,7 @@ const formSchema = z.object({
   description: z.string().min(1).max(250),
   language: z.string().min(1).max(50),
   githubRepo: z.string().min(1).max(50),
+  tags: z.string().min(1).max(50),
 });
 
 export function CreateRoomForm() {
@@ -34,7 +35,8 @@ export function CreateRoomForm() {
       name: "",
       description: "",
       language: "",
-      githubRepo: "",
+      githubRepo: "https://github.com/",
+      tags: "",
     },
   });
 
@@ -54,7 +56,7 @@ export function CreateRoomForm() {
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} placeholder="Codemate" />
               </FormControl>
               <FormDescription>This is your public Room Name.</FormDescription>
               <FormMessage />
@@ -68,10 +70,13 @@ export function CreateRoomForm() {
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input
+                  {...field}
+                  placeholder="I am working on my major project, come join me!"
+                />
               </FormControl>
               <FormDescription>
-                Please Describe what you all cooking!.
+                Please Describe what you all cooking!
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -84,7 +89,7 @@ export function CreateRoomForm() {
             <FormItem>
               <FormLabel>Primary Programming Language</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} placeholder="Javascript" />
               </FormControl>
               <FormDescription>
                 Please Enter language on which you all be working on.
@@ -104,6 +109,26 @@ export function CreateRoomForm() {
               </FormControl>
               <FormDescription>
                 Please provide repo link in which you are working on.
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="tags"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Tags</FormLabel>
+              <FormControl>
+                <Input
+                  {...field}
+                  placeholder="ex. typescript, tailwind, nextjs"
+                />
+              </FormControl>
+              <FormDescription>
+                List your techstacks, libraries, stylings so that peers can find
+                your content. (add comma separated)
               </FormDescription>
               <FormMessage />
             </FormItem>

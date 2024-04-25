@@ -74,10 +74,11 @@ export const room = pgTable("room", {
   userId: text("userId")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }), // This means room belongs to the user who created it and can delete it
-  name: text("name"),
-  language: text("language"),
+  name: text("name").notNull(),
+  language: text("language").notNull(),
   githubRepo: text("githubRepo"),
   description: text("description"),
+  tags: text("tags").notNull(),
 });
 
 export type Room = typeof room.$inferSelect;
