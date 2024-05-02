@@ -29,7 +29,10 @@ function AccountDropdown() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuItem className="cursor-pointer" onClick={() => signOut()}>
+        <DropdownMenuItem
+          className="cursor-pointer"
+          onClick={() => signOut({ callbackUrl: "/" })}
+        >
           <LogOutIcon className="mr-2" /> Sign Out
         </DropdownMenuItem>
       </DropdownMenuContent>
