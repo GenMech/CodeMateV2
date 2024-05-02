@@ -1,15 +1,20 @@
+"use client";
+
+import { useRouter } from "next/navigation";
 import { Badge } from "./ui/badge";
 
-// To split tags that will be shown on UI
-export function splitTags(tags: string) {
-  return tags?.split(",").map((tag) => tag.trim());
-}
-
 export function TagsList({ tags }: { tags: string[] }) {
+  const router = useRouter();
   return (
     <div className="flex gap-2 flex-wrap pb-1">
       {tags?.map((tag) => (
-        <Badge className="w-fit" key={tag}>
+        <Badge
+          onClick={() => {
+            router.push(`/?search=${tag}`);
+          }}
+          className="w-fit cursor-pointer"
+          key={tag}
+        >
           {tag}
         </Badge>
       ))}
