@@ -13,6 +13,7 @@ import { Room } from "@/db/schema";
 import { GithubIcon } from "lucide-react";
 import { getRooms } from "@/services/rooms";
 import { TagsList, splitTags } from "@/components/tagsList";
+import { SearchBar } from "./searchBar";
 
 function RoomCard({ room }: { room: Room }) {
   return (
@@ -46,8 +47,12 @@ function RoomCard({ room }: { room: Room }) {
   );
 }
 
-export default async function Home() {
-  const rooms = await getRooms();
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: { search: string };
+}) {
+  const rooms = await getRooms(searchParams.search);
 
   return (
     <main className="min-h-screen p-14 ">
@@ -57,6 +62,9 @@ export default async function Home() {
           {/* // asChild means, Create this as DOM node but apply all the styles of the button would be on this (Link component) */}
           <Link href="/createRoom">Create Room</Link>
         </Button>
+      </div>
+      <div className="mb-8">
+        <SearchBar />
       </div>
       <div className="grid lg:grid-cols-4 gap-4 md:grid-cols-2 sm:grid-cols-1">
         {rooms.map((room) => {
