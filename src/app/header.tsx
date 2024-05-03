@@ -53,7 +53,12 @@ export function Header() {
               Sign In
             </Button>
           ) : (
-            <AccountDropdown />
+            <div className="flex justify-center">
+              <AccountDropdown />
+              <Button variant={"outline"} asChild>
+                <Link href="/yourRooms">Your Rooms</Link>
+              </Button>
+            </div>
           )}
           <ModeToggle />
         </div>
