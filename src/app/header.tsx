@@ -10,7 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { LogOutIcon } from "lucide-react";
+import { LogIn, LogOutIcon } from "lucide-react";
 import Link from "next/link";
 
 function AccountDropdown() {
@@ -49,8 +49,12 @@ export function Header() {
         <Link href="/">CodeMate</Link>
         <div className="flex items-center gap-4">
           {!session.data ? (
-            <Button variant={"outline"} onClick={() => signIn("google")}>
-              Sign In
+            <Button
+              variant={"ghost"}
+              onClick={() => signIn("google")}
+              className="flex gap-2"
+            >
+              <LogIn /> Sign In
             </Button>
           ) : (
             <div className="flex justify-center">
