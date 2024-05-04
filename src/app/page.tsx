@@ -3,12 +3,14 @@ import Link from "next/link";
 import { getRooms } from "@/services/rooms";
 import { SearchBar } from "./searchBar";
 import { RoomCard } from "@/components/roomCard";
+import { unstable_noStore as noStore } from "next/cache";
 
 export default async function Home({
   searchParams,
 }: {
   searchParams: { search: string };
 }) {
+  noStore(); // It can be used to declaratively opt out of static rendering and indicate a particular component should not be cached.
   const rooms = await getRooms(searchParams.search);
 
   return (
@@ -25,7 +27,7 @@ export default async function Home({
       </div>
       <div className="grid lg:grid-cols-4 gap-4 md:grid-cols-2 sm:grid-cols-1">
         {rooms.map((room) => {
-          return <RoomCard key={room.id} room={room} />;
+          return <RoomCard key={room.id} room={room} isUser={false} />;
         })}
       </div>
     </main>

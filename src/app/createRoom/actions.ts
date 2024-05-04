@@ -16,5 +16,5 @@ export async function createRoomAction(roomData: Omit<Room, "userId" | "id">) {
 
   await db.insert(room).values({ ...roomData, userId: session.user.id });
 
-  revalidatePath("/"); // To purge cache data
+  revalidatePath("/"); // To purge cache data, it will refetch the data on route
 }

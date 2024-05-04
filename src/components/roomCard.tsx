@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import {
@@ -9,15 +11,64 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Room } from "@/db/schema";
-import { GithubIcon } from "lucide-react";
+import { GithubIcon, TrashIcon } from "lucide-react";
 import { TagsList } from "@/components/tagsList";
 import { splitTags } from "@/lib/utils";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { deleteRoomAction } from "@/app/yourRooms/actions";
 
-export function RoomCard({ room }: { room: Room }) {
+export function RoomCard({ room, isUser }: { room: Room; isUser: boolean }) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{room.name}</CardTitle>
+        <CardTitle className="flex justify-between">
+          <div className="flex items-center">{room.name}</div>
+          {isUser && (
+            <div>
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <Button
+                    className="w-[52px] h-[34px]"
+                    variant="ghost"
+                    onClick={() => {}}
+                  >
+                    <TrashIcon color="#9A2A2A" />
+                  </Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>
+                      Are you absolutely sure?
+                    </AlertDialogTitle>
+                    <AlertDialogDescription>
+                      This action cannot be undone. This will permanently remove
+                      your room and any data associated with it.
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogAction
+                      onClick={() => deleteRoomAction(room.id)}
+                    >
+                      Yes, Delete
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+            </div>
+          )}
+        </CardTitle>
+
         <CardDescription className="h-14 line-clamp-3">
           {room.description}
         </CardDescription>

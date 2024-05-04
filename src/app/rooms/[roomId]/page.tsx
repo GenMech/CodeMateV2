@@ -4,9 +4,11 @@ import { GithubIcon } from "lucide-react";
 import { TagsList } from "@/components/tagsList";
 import { CodemateVideoPlayer } from "./videoPlayer";
 import { splitTags } from "@/lib/utils";
+import { unstable_noStore as noStore } from "next/cache";
 
 export default async function RoomPage(props: { params: { roomId: string } }) {
   const roomId = props.params.roomId;
+  noStore(); // It can be used to declaratively opt out of static rendering and indicate a particular component should not be cached.
   const room = await getRoom(roomId);
 
   if (!room) {
