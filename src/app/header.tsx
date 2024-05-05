@@ -44,7 +44,7 @@ export function Header() {
   const session = useSession();
 
   return (
-    <header className="bg-gray-100 dark:bg-gray-900 py-3 px-5">
+    <header className="bg-gray-100 dark:bg-gray-900 py-3 px-5 z-10 relative">
       <div className="flex justify-between items-center">
         <Link href="/">CodeMate</Link>
         <div className="flex items-center gap-4">
@@ -57,8 +57,11 @@ export function Header() {
               <LogIn /> Sign In
             </Button>
           ) : (
-            <div className="flex justify-center">
+            <div className="flex justify-center gap-2">
               <AccountDropdown />
+              <Button variant={"outline"} asChild>
+                <Link href="/browse">Browse</Link>
+              </Button>
               <Button variant={"outline"} asChild>
                 <Link href="/yourRooms">Your Rooms</Link>
               </Button>
