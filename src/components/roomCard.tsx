@@ -93,7 +93,14 @@ export function RoomCard({ room, isUser }: { room: Room; isUser: boolean }) {
       </CardContent>
       <CardFooter className="flex gap-3">
         <Button asChild>
-          <Link href={`/rooms/${room.id}`}>Join Room</Link>
+          <Link
+            href={`/rooms/${room.id}`}
+            onClick={() => {
+              toast.info("Room joined!");
+            }}
+          >
+            Join Room
+          </Link>
         </Button>
         {isUser && (
           <Button className="" size="icon">

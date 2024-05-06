@@ -17,6 +17,7 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { generateTokenAction } from "./actions";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 const apiKey = process.env.NEXT_PUBLIC_GET_STREAM_API_KEY!;
 
@@ -44,6 +45,8 @@ export const CodemateVideoPlayer = ({ room }: { room: Room }) => {
     });
     setClient(client);
     const call = client.call("default", room.id);
+    call.camera.disable();
+    call.microphone.disable();
     call.join({ create: true });
     setCall(call);
 
@@ -62,7 +65,12 @@ export const CodemateVideoPlayer = ({ room }: { room: Room }) => {
         <StreamTheme>
           <StreamCall call={call}>
             <SpeakerLayout />
-            <CallControls onLeave={() => router.push("/")} />
+            <CallControls
+              onLeave={() => {
+                router.push("/browse");
+                toast.info("You Left the Room!");
+              }}
+            />
             <CallParticipantsList onClose={() => undefined} />
           </StreamCall>
         </StreamTheme>
