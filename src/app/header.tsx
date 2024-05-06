@@ -10,33 +10,82 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { LogIn, LogOutIcon } from "lucide-react";
+import { LogIn, LogOutIcon, UserRoundX } from "lucide-react";
 import Link from "next/link";
+import { DropdownMenuSeparator } from "@radix-ui/react-dropdown-menu";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { useState } from "react";
+import { deleteAccountAction } from "./actions";
 
 function AccountDropdown() {
   const session = useSession();
+  const [open, setOpen] = useState(false);
   // const isLoggedIn = !!session.data;
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant={"link"}>
-          <Avatar className="mr-2">
-            <AvatarImage src={session.data?.user?.image ?? ""} />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-          {session.data?.user?.name && `Welcome, ${session.data?.user?.name}`}
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent>
-        <DropdownMenuItem
-          className="cursor-pointer"
-          onClick={() => signOut({ callbackUrl: "/" })}
-        >
-          <LogOutIcon className="mr-2" /> Sign Out
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <>
+      <AlertDialog open={open} onOpenChange={setOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. This will permanently remove your
+              account and any data your have.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={async () => {
+                await deleteAccountAction();
+                signOut({ callbackUrl: "/" });
+              }}
+            >
+              Yes, delete my account
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant={"link"}>
+            <Avatar className="mr-2">
+              <AvatarImage src={session.data?.user?.image ?? ""} />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+            {session.data?.user?.name && `Welcome, ${session.data?.user?.name}`}
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuItem
+            className="cursor-pointer"
+            onClick={() => signOut({ callbackUrl: "/" })}
+          >
+            <LogOutIcon className="mr-2" /> Sign Out
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem
+            onClick={() => {
+              setOpen(true);
+            }}
+            className="cursor-pointer"
+          >
+            <UserRoundX className="mr-2" /> Delete Account
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </>
   );
 }
 
