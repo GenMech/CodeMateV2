@@ -1,8 +1,8 @@
 "use server";
 
-import { db } from "@/db";
-import { Room, room } from "@/db/schema";
+import { Room } from "@/db/schema";
 import { getSession } from "@/lib/auth";
+import { createRoom } from "@/services/rooms";
 import { revalidatePath } from "next/cache";
 
 export async function createRoomAction(roomData: Omit<Room, "userId" | "id">) {
@@ -14,7 +14,7 @@ export async function createRoomAction(roomData: Omit<Room, "userId" | "id">) {
     throw new Error("You must be logged in to create this room!");
   }
 
-  await db.insert(room).values({ ...roomData, userId: session.user.id });
+  await createRoom(roomData, session.user.id);
 
   revalidatePath("/"); // To purge cache data, it will refetch the data on route
 }

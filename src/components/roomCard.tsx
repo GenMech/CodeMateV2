@@ -11,7 +11,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Room } from "@/db/schema";
-import { GithubIcon, TrashIcon } from "lucide-react";
+import { GithubIcon, PencilIcon, TrashIcon } from "lucide-react";
 import { TagsList } from "@/components/tagsList";
 import { splitTags } from "@/lib/utils";
 import {
@@ -87,10 +87,17 @@ export function RoomCard({ room, isUser }: { room: Room; isUser: boolean }) {
           </Link>
         )}
       </CardContent>
-      <CardFooter>
+      <CardFooter className="flex gap-3">
         <Button asChild>
           <Link href={`/rooms/${room.id}`}>Join Room</Link>
         </Button>
+        {isUser && (
+          <Button className="" size="icon">
+            <Link href={`/editRoom/${room.id}`}>
+              <PencilIcon />
+            </Link>
+          </Button>
+        )}
       </CardFooter>
     </Card>
   );
