@@ -4,6 +4,8 @@ import "./globals.css";
 import { Providers } from "./provider";
 import { Header } from "./header";
 import NextTopLoader from "nextjs-toploader";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +24,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Providers>
           <NextTopLoader />
+          <ToastContainer theme="colored" position="bottom-center" />
           <Header />
           {children}
         </Providers>

@@ -26,6 +26,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { deleteRoomAction } from "@/app/yourRooms/actions";
+import { toast } from "react-toastify";
 
 export function RoomCard({ room, isUser }: { room: Room; isUser: boolean }) {
   return (
@@ -58,7 +59,10 @@ export function RoomCard({ room, isUser }: { room: Room; isUser: boolean }) {
                   <AlertDialogFooter>
                     <AlertDialogCancel>Cancel</AlertDialogCancel>
                     <AlertDialogAction
-                      onClick={() => deleteRoomAction(room.id)}
+                      onClick={() => {
+                        deleteRoomAction(room.id);
+                        toast.success("Room deleted successfully!");
+                      }}
                     >
                       Yes, Delete
                     </AlertDialogAction>
