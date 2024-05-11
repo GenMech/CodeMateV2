@@ -1,3 +1,4 @@
 - We will be using Docker to set up local postgres database
 - The exclamation mark (!) is a TypeScript syntax used to assert to the TypeScript compiler that the value of process.env.DATABASE_URL will never be null or undefined. This is known as a non-null assertion operator
 - "db:push": "drizzle-kit push:pg --config=drizzle.config.ts" : This command is telling drizzle that when someone makes changes to our schema files then I need u to use this config file and figure out how to connect to my database and apply those changes
+- For Deployment: I have to point vercel to my repo, setup env variables, find a database host, point my vercel to my prod database, run migration scripts against my prod database
