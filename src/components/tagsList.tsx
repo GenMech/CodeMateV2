@@ -10,7 +10,7 @@ export function TagsList({ tags }: { tags: string[] }) {
       {tags?.map((tag) => (
         <Badge
           onClick={() => {
-            router.push(`/?search=${tag}`);
+            router.push(`/browse/?search=${tag}`);
           }}
           className="w-fit cursor-pointer"
           key={tag}
